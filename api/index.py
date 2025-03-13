@@ -14,11 +14,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # MongoDB connection
-mongo_uri = "mongodb+srv://antu_roy_chow:ryZ2rxvRg1eXKI3r@anturoychowdhur.87lt0.mongodb.net/"  # Change to your Atlas URI if using cloud
+import os
+mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
 db = client['web_scraper_db']  # Database name
 collection = db['scraped_data']  # Collection name
-
+@app.route('/')
+def  msg():
+    return "hello world"
 @app.route('/api/test-mongo', methods=['GET'])
 def test_mongo():
     try:
